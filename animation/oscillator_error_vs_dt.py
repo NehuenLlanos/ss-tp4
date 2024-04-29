@@ -8,7 +8,7 @@ A = 1
 GAMMA = 100
 M = 70
 K = 10**4
-RUNS = range(7)
+RUNS = range(5)
 ##########################################
 
 
@@ -63,6 +63,7 @@ ax.set_xlabel("$\\Delta t \\  \\left( s \\right)$", fontdict={"weight": "bold"})
 ax.set_ylabel("$ECM$", fontdict={"weight": "bold"})
 ax.legend(handles=lines)
 
+plt.xscale("log")
 plt.yscale("log")
 # Display the animation
 plt.show()

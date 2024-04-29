@@ -21,8 +21,8 @@ public class OscillatorMain {
         double r0 = 1.0;
         double v0 = - 1 * Constants.A * Constants.GAMMA / (2 * Constants.M);
 
-        int i = 0;
-        for (double dt = Math.pow(10, -6); dt <= Math.pow(10, -3); dt += 1.665 * Math.pow(10, -4), i++) {
+        for (int i = 0, j = 6; j >= 2; j--, i++) {
+            double dt = Math.pow(10, -j);
             try (BufferedWriter writer = Files.newBufferedWriter(
                     Paths.get(String.format("verlet_%d.txt", i)),
                     StandardOpenOption.WRITE,
