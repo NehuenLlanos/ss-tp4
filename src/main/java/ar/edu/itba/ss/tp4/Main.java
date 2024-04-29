@@ -18,6 +18,8 @@ import java.util.function.BiFunction;
 public class Main {
     public static void main(String[] args) {
         BiFunction<Double, Double, Double> acceleration = (r,v) -> (-1 * Constants.K * r - 1 * Constants.GAMMA * v) / Constants.M;
+        double r0 = 1.0;
+        double v0 = - 1 * Constants.A * Constants.GAMMA / (2 * Constants.M);
 
         try (BufferedWriter writer = Files.newBufferedWriter(
                     Paths.get("verlet.txt"),
@@ -29,8 +31,8 @@ public class Main {
             IntegratorMethod originalVerlet = new OriginalVerlet(
                     0.001,
                     acceleration,
-                    1,
-                    -100 / 140.0
+                    r0,
+                    v0
             );
 
             Iterator<StateVariables> it = originalVerlet.iterator();
@@ -54,8 +56,8 @@ public class Main {
             IntegratorMethod beeman = new Beeman(
                     0.001,
                     acceleration,
-                    1,
-                    -100 / 140.0
+                    r0,
+                    v0
             );
 
             Iterator<StateVariables> it = beeman.iterator();
@@ -76,18 +78,16 @@ public class Main {
                 StandardOpenOption.TRUNCATE_EXISTING
         )
         ) {
-            double initialR = 1.0;
-            double initialR1 = -100 / 140.0;
-            double initialR2 = acceleration.apply(initialR, initialR1);
-            double initialR3 = acceleration.apply(initialR1, initialR2);
+            double initialR2 = acceleration.apply(r0, v0);
+            double initialR3 = acceleration.apply(v0, initialR2);
             double initialR4 = acceleration.apply(initialR2, initialR3);
             double initialR5 = acceleration.apply(initialR3, initialR4);
 
             IntegratorMethod gearPredictor = new GearPredictor(
                     0.001,
                     acceleration,
-                    initialR,
-                    initialR1,
+                    r0,
+                    v0,
                     initialR2,
                     initialR3,
                     initialR4,

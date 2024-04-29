@@ -43,7 +43,7 @@ public class OriginalVerlet implements IntegratorMethod {
 
                 final double newR = 2 * r - previousR + acceleration.apply(r, v) * Math.pow(dt, 2);
                 final double newNewR = 2 * newR - r + acceleration.apply(newR, v) * Math.pow(dt, 2);
-                final double newV = (newNewR - previousR) / (2 * dt);
+                final double newV = (newNewR - r) / (2 * dt);
 
                 t += dt;
                 previousR = r;
