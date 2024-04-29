@@ -1,5 +1,6 @@
 package ar.edu.itba.ss.tp4;
 
+import ar.edu.itba.ss.tp4.integrator.Beeman;
 import ar.edu.itba.ss.tp4.integrator.IntegratorMethod;
 import ar.edu.itba.ss.tp4.integrator.OriginalVerlet;
 import ar.edu.itba.ss.tp4.utils.Constants;
@@ -32,6 +33,31 @@ public class Main {
             );
 
             Iterator<StateVariables> it = originalVerlet.iterator();
+            StateVariables vars;
+            do {
+                vars = it.next();
+                writer.write(vars.time() + " " + vars.position() + " " + vars.velocity());
+                writer.newLine();
+            } while (vars.time() <= 5);
+        } catch (IOException e) {
+            throw new RuntimeException("Could not write files.");
+        }
+
+        try (BufferedWriter writer = Files.newBufferedWriter(
+                Paths.get("beeman.txt"),
+                StandardOpenOption.WRITE,
+                StandardOpenOption.CREATE,
+                StandardOpenOption.TRUNCATE_EXISTING
+        )
+        ) {
+            IntegratorMethod beeman = new Beeman(
+                    0.001,
+                    acceleration,
+                    1,
+                    -100 / 140.0
+            );
+
+            Iterator<StateVariables> it = beeman.iterator();
             StateVariables vars;
             do {
                 vars = it.next();
