@@ -1,4 +1,5 @@
 import csv
+import os
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -17,19 +18,24 @@ def get_analytic_solution(times):
     return positions
 
 
-with (open(f"../verlet.txt") as verlet_file, open(f"../beeman.txt") as beeman_file):
+with (open(os.path.join(os.path.dirname(__file__), "..", "verlet.txt")) as verlet_file,
+      open(os.path.join(os.path.dirname(__file__), "..", "beeman.txt")) as beeman_file,
+      open(os.path.join(os.path.dirname(__file__), "..", "gear_predictor.txt")) as gear_predictor_file):
     verlet = list(csv.reader(verlet_file, delimiter=" "))
     beeman = list(csv.reader(beeman_file, delimiter=" "))
+    gear_predictor = list(csv.reader(gear_predictor_file, delimiter=" "))
     time = [float(x[0]) for x in verlet]
     position_verlet = [float(x[1]) for x in verlet]
     position_beeman = [float(x[1]) for x in beeman]
+    position_gear_predictor = [float(x[1]) for x in gear_predictor]
 
     plt.rcParams.update({'font.size': 20})
     fig, ax = plt.subplots()
     lines = []
     lines.append(ax.plot(time, position_verlet, label="Verlet")[0])
     lines.append(ax.plot(time, position_beeman, label="Beeman")[0])
-    lines.append(ax.plot(time, get_analytic_solution(time), label="Real")[0])
+    lines.append(ax.plot(time, position_gear_predictor, label="Gear Predictor")[0])
+    lines.append(ax.plot(time, get_analytic_solution(time), label="Real", linestyle="dotted")[0])
 
     ax.set_xlabel("Tiempo $(s)$", fontdict={"weight": "bold"})
     ax.set_ylabel("Posición $(m)$", fontdict={"weight": "bold"})
