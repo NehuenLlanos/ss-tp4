@@ -8,7 +8,7 @@ import java.util.function.BiFunction;
 
 public class GearPredictor implements IntegratorMethod {
     private final double dt;
-    private final BiFunction<Double, Double, Double> acceleration;
+    private BiFunction<Double, Double, Double> acceleration;
     private final double initialR;
     private final double initialR1;
     private final double initialR2;
@@ -34,6 +34,10 @@ public class GearPredictor implements IntegratorMethod {
         this.initialR3 = initialR3;
         this.initialR4 = initialR4;
         this.initialR5 = initialR5;
+    }
+
+    public void setAcceleration(BiFunction<Double, Double, Double> acceleration) {
+        this.acceleration = acceleration;
     }
 
     @Override

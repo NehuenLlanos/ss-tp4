@@ -1,5 +1,7 @@
 package ar.edu.itba.ss.tp4.mission;
 
+import ar.edu.itba.ss.tp4.utils.StateVariables;
+
 public class Object {
     private double radius;
     private double mass;
@@ -63,5 +65,26 @@ public class Object {
 
     public void setVy(double vy) {
         this.vy = vy;
+    }
+
+    public void set(StateVariables stateX, StateVariables stateY) {
+        this.setX(stateX.position());
+        this.setVx(stateX.velocity());
+        this.setY(stateY.position());
+        this.setVy(stateY.velocity());
+    }
+
+    public static Object createSpaceshipFromEarth(Object earth, double mass, double relativePosition, double relativeTangentialVelocity) {
+        double theta = Math.atan2(earth.getY(), earth.getX());
+        double spaceshipX = earth.getX() + earth.getRadius() + relativePosition * Math.cos(theta);
+        double spaceshipY = earth.getY() + earth.getRadius() + relativePosition * Math.sin(theta);
+        double earthTangentialVelocity = earth.getVy() / Math.cos(theta);
+        double spaceshipVx = (relativeTangentialVelocity + earthTangentialVelocity) * Math.sin(theta);
+        double spaceshipVy = (relativeTangentialVelocity + earthTangentialVelocity) * Math.cos(theta);
+        return new Object(0, mass, spaceshipX, spaceshipY, spaceshipVx, spaceshipVy);
+    }
+
+    public double distanceTo(Object other) {
+        return Math.sqrt(Math.pow(this.x - other.x, 2) + Math.pow(this.y - other.y, 2));
     }
 }
