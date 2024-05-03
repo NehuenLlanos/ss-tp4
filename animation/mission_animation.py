@@ -7,9 +7,9 @@ from matplotlib.animation import FuncAnimation, FFMpegWriter
 ########### CONSTANT VARIABLES ###########
 FILENAME = "mars_mission"
 SUN_RADIUS = 6.96340 * 10**7
-EARTH_RADIUS = 6.371 * 10**6
-MARS_RADIUS = 3.3895 * 10**7
-SPACESHIP_RADIUS = 1000 * 10**3
+EARTH_RADIUS = 6.371 * 10**6.5
+MARS_RADIUS = 3.3895 * 10**6.5
+SPACESHIP_RADIUS = 1000 * 10**3.5
 ##########################################
 
 
@@ -25,8 +25,8 @@ with open(os.path.join(os.path.dirname(__file__), "..", f"{FILENAME}.txt")) as d
         ax.clear()
         ax.get_xaxis().set_visible(False)
         ax.get_yaxis().set_visible(False)
-        ax.set_xlim(-5 * 10**8, 5 * 10**8)
-        ax.set_ylim(-5 * 10**8, 5 * 10**8)
+        ax.set_xlim(-3 * 10**8, 3 * 10**8)
+        ax.set_ylim(-3 * 10**8, 3 * 10**8)
         ax.set_aspect('equal', adjustable='box')
 
         # Plot each object
