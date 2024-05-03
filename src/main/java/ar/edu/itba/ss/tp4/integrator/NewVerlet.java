@@ -5,13 +5,13 @@ import ar.edu.itba.ss.tp4.utils.StateVariables;
 import java.util.Iterator;
 import java.util.function.BiFunction;
 
-public class OriginalVerlet implements IntegratorMethod{
+public class NewVerlet implements IntegratorMethod {
     private final double dt;
     private final BiFunction<Double, Double, Double> acceleration;
     private final double r0;
     private final double v0;
 
-    public OriginalVerlet(
+    public NewVerlet(
             final double dt,
             final BiFunction<Double, Double, Double> acceleration,
             final double r0,
@@ -41,7 +41,8 @@ public class OriginalVerlet implements IntegratorMethod{
                 final StateVariables returnValue = new StateVariables(t, r, v);
 
                 final double newR = 2 * r - previousR + acceleration.apply(r, v) * Math.pow(dt, 2);
-                final double newV = (newR - previousR) / (2 * dt);
+                final double newNewR = 2 * newR - r + acceleration.apply(newR, v) * Math.pow(dt, 2);
+                final double newV = (newNewR - r) / (2 * dt);
 
                 t += dt;
                 previousR = r;
