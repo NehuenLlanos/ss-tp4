@@ -36,7 +36,6 @@ public class OriginalVerlet implements IntegratorMethod {
                 return true;
             }
 
-            // TODO: It may be wrong, too much difference with analytic solution. Check it.
             @Override
             public StateVariables next() {
                 final StateVariables returnValue = new StateVariables(t, r, v);

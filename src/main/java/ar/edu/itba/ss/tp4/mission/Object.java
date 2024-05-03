@@ -75,12 +75,16 @@ public class Object {
     }
 
     public static Object createSpaceshipFromEarth(Object earth, double mass, double relativePosition, double relativeTangentialVelocity) {
-        double theta = Math.atan2(earth.getY(), earth.getX());
-        double spaceshipX = earth.getX() + earth.getRadius() + relativePosition * Math.cos(theta);
-        double spaceshipY = earth.getY() + earth.getRadius() + relativePosition * Math.sin(theta);
-        double earthTangentialVelocity = earth.getVy() / Math.cos(theta);
-        double spaceshipVx = (relativeTangentialVelocity + earthTangentialVelocity) * Math.sin(theta);
-        double spaceshipVy = (relativeTangentialVelocity + earthTangentialVelocity) * Math.cos(theta);
+        double normalVersorX = earth.getX() / Math.sqrt(Math.pow(earth.getX(), 2) + Math.pow(earth.getY(), 2));
+        double normalVersorY = earth.getY() / Math.sqrt(Math.pow(earth.getX(), 2) + Math.pow(earth.getY(), 2));
+        double tangentVersorX = -normalVersorY;
+        double tangentVersorY = normalVersorX;
+
+        double spaceshipX = earth.getX() + (earth.getRadius() + relativePosition) * normalVersorX;
+        double spaceshipY = earth.getY() + (earth.getRadius() + relativePosition) * normalVersorY;
+        double spaceshipVx = earth.getVx() + relativeTangentialVelocity * tangentVersorX;
+        double spaceshipVy = earth.getVy() + relativeTangentialVelocity * tangentVersorY;
+
         return new Object(0, mass, spaceshipX, spaceshipY, spaceshipVx, spaceshipVy);
     }
 

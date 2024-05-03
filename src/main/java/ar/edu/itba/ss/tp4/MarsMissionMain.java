@@ -1,7 +1,10 @@
 package ar.edu.itba.ss.tp4;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -47,10 +50,6 @@ public class MarsMissionMain {
 
         final MarsMission mission = new MarsMission(sun, earth, mars, spaceshipMass, spaceshipRelativePosition, spaceshipTangentialRelativeVelocity);
 
-        List<PlanetaryVariables> planetaryData = mission.simulate(1, 0);
-
-        for (PlanetaryVariables pv : planetaryData) {
-            System.out.println(pv);
-        }
+        mission.simulate(10000, 0, "mars_mission.txt");
     }
 }
