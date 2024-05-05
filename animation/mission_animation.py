@@ -26,6 +26,7 @@ with open(os.path.join(os.path.dirname(__file__), "..", f"{FILENAME}.txt")) as d
     earth_texture = Image.open(os.path.join(os.path.dirname(__file__), "textures", "earth.jpeg"))
     mars_texture = Image.open(os.path.join(os.path.dirname(__file__), "textures", "mars.jpeg"))
     spaceship_texture = Image.open(os.path.join(os.path.dirname(__file__), "textures", "spaceship.png"))
+    space_texture = Image.open(os.path.join(os.path.dirname(__file__), "textures", "space.jpeg"))
 
     def update(i):
         ax.clear()
@@ -41,6 +42,11 @@ with open(os.path.join(os.path.dirname(__file__), "..", f"{FILENAME}.txt")) as d
         earth_patch = ptchs.Circle((data[i][1], data[i][2]), EARTH_RADIUS, transform=ax.transData)
         mars_patch = ptchs.Circle((data[i][3], data[i][4]), MARS_RADIUS, transform=ax.transData)
 
+        ax.imshow(
+            space_texture,
+            extent=(-AXIS_LIMIT, AXIS_LIMIT,
+                    -AXIS_LIMIT, AXIS_LIMIT)
+        )
         ax.imshow(
             spaceship_texture,
             extent=(data[i][5] - SPACESHIP_RADIUS, data[i][5] + SPACESHIP_RADIUS,
@@ -68,6 +74,6 @@ with open(os.path.join(os.path.dirname(__file__), "..", f"{FILENAME}.txt")) as d
     ani = FuncAnimation(fig, update, frames=len(data), blit=False, interval=1)
 
     # Display the animation
-    # plt.show()
+    plt.show()
     # Save the animation
-    ani.save("../animation.mp4", writer=FFMpegWriter(fps=30))
+    # ani.save("../animation.mp4", writer=FFMpegWriter(fps=30))

@@ -378,7 +378,9 @@ $RECYCLE.BIN/
 !docs/*.png
 !docs/*.jpg
 !docs/*.jpeg
-!animation/textures/**
+!animation/textures/**.png
+!animation/textures/**.jpg
+!animation/textures/**.jpeg
 *.mp4
 *.mov
 
