@@ -23,7 +23,7 @@ public class MarsMission {
     private final double spaceshipRelativePosition;
     private final double spaceshipTangentialRelativeVelocity;
 
-    private final static long MAX_MISSION_SECONDS = 86400000;
+    private final static long MAX_MISSION_SECONDS = 60 * 60 * 24 * 365 * 2;
     private final static double MIN_DISTANCE_TO_MARS = 130;
 
     public MarsMission(Object sun, Object earth, Object mars, double spaceshipMass, double spaceshipRelativePosition, double spaceshipTangentialRelativeVelocity) {
@@ -71,7 +71,7 @@ public class MarsMission {
         Iterator<StateVariables> spaceshipYIterator = null;
 
         try (BufferedWriter writer = Files.newBufferedWriter(
-                Paths.get("mars_mission.txt"),
+                Paths.get(filename),
                 StandardOpenOption.WRITE,
                 StandardOpenOption.CREATE,
                 StandardOpenOption.TRUNCATE_EXISTING

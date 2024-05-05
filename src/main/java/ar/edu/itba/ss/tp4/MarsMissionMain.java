@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -44,12 +45,24 @@ public class MarsMissionMain {
         final double spaceshipRelativePosition = Double.parseDouble(data.get(15)); // Spaceship position relative to Earth
         final double spaceshipTangentialRelativeVelocity = Double.parseDouble(data.get(16)); // Spaceship tangential velocity relative to Earth
 
-        final Object sun = new Object(sunRadius, sunMass, 0, 0, 0, 0);
-        final Object earth = new Object(earthRadius, earthMass, earthX, earthY, earthVelocityX, earthVelocityY);
-        final Object mars = new Object(marsRadius, marsMass, marsX, marsY, marsVelocityX, marsVelocityY);
+        // To run the simulation with a specific delta t and departure time
+//        final Object sun = new Object(sunRadius, sunMass, 0, 0, 0, 0);
+//        final Object earth = new Object(earthRadius, earthMass, earthX, earthY, earthVelocityX, earthVelocityY);
+//        final Object mars = new Object(marsRadius, marsMass, marsX, marsY, marsVelocityX, marsVelocityY);
+//
+//        final MarsMission mission = new MarsMission(sun, earth, mars, spaceshipMass, spaceshipRelativePosition, spaceshipTangentialRelativeVelocity);
+//
+//        mission.simulate(1000, 0, String.format("mars_mission.txt"));
 
-        final MarsMission mission = new MarsMission(sun, earth, mars, spaceshipMass, spaceshipRelativePosition, spaceshipTangentialRelativeVelocity);
-
-        mission.simulate(10000, 0, "mars_mission.txt");
+        // To run the simulation with different delta t
+//        List.of(10, 20, 30, 40, 50).parallelStream().forEach(dt -> {
+//            final Object sun = new Object(sunRadius, sunMass, 0, 0, 0, 0);
+//            final Object earth = new Object(earthRadius, earthMass, earthX, earthY, earthVelocityX, earthVelocityY);
+//            final Object mars = new Object(marsRadius, marsMass, marsX, marsY, marsVelocityX, marsVelocityY);
+//
+//            final MarsMission mission = new MarsMission(sun, earth, mars, spaceshipMass, spaceshipRelativePosition, spaceshipTangentialRelativeVelocity);
+//
+//            mission.simulate(dt, 0, String.format("mars_mission_%d.txt", dt));
+//        });
     }
 }
