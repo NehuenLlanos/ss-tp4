@@ -64,5 +64,50 @@ public class MarsMissionMain {
 //
 //            mission.simulate(dt, 0, String.format("mars_mission_%d.txt", dt));
 //        });
+
+        // To run the simulation with different departure times (varying per days)
+//        List<Integer> departures = new ArrayList<>();
+//        for (int i = 0; i < 60 * 60 * 24 * 365 * 2; i += 60 * 60 * 24) {
+//            departures.add(i);
+//        }
+//        departures.parallelStream().forEach(departure -> {
+//            final Object sun = new Object(sunRadius, sunMass, 0, 0, 0, 0);
+//            final Object earth = new Object(earthRadius, earthMass, earthX, earthY, earthVelocityX, earthVelocityY);
+//            final Object mars = new Object(marsRadius, marsMass, marsX, marsY, marsVelocityX, marsVelocityY);
+//
+//            final MarsMission mission = new MarsMission(sun, earth, mars, spaceshipMass, spaceshipRelativePosition, spaceshipTangentialRelativeVelocity);
+//
+//            mission.simulate(60, departure, String.format("departures/mars_mission_departure_%d.txt", departure));
+//        });
+
+        // To run the simulation with different departure times (varying per hour)
+//        List<Integer> departures = new ArrayList<>();
+//        for (int i = 0; i < 60 * 60 * 24 * 4; i += 60 * 60) {
+//            departures.add(i + 170 * 24 * 60 * 60);
+//        }
+//        departures.parallelStream().forEach(departure -> {
+//            final Object sun = new Object(sunRadius, sunMass, 0, 0, 0, 0);
+//            final Object earth = new Object(earthRadius, earthMass, earthX, earthY, earthVelocityX, earthVelocityY);
+//            final Object mars = new Object(marsRadius, marsMass, marsX, marsY, marsVelocityX, marsVelocityY);
+//
+//            final MarsMission mission = new MarsMission(sun, earth, mars, spaceshipMass, spaceshipRelativePosition, spaceshipTangentialRelativeVelocity);
+//
+//            mission.simulate(60, departure, String.format("departures_day_170/mars_mission_departure_%d.txt", departure));
+//        });
+
+        // Simulation for 172nd day between 5am and 7am per minute. Seems to be the optimum deployment.
+        List<Integer> departures = new ArrayList<>();
+        for (int i = 171 * 24 * 60 * 60 + 22 * 60 * 60; i < 171 * 24 * 60 * 60 + 24 * 60 * 60; i += 60) {
+            departures.add(i);
+        }
+        departures.parallelStream().forEach(departure -> {
+            final Object sun = new Object(sunRadius, sunMass, 0, 0, 0, 0);
+            final Object earth = new Object(earthRadius, earthMass, earthX, earthY, earthVelocityX, earthVelocityY);
+            final Object mars = new Object(marsRadius, marsMass, marsX, marsY, marsVelocityX, marsVelocityY);
+
+            final MarsMission mission = new MarsMission(sun, earth, mars, spaceshipMass, spaceshipRelativePosition, spaceshipTangentialRelativeVelocity);
+
+            mission.simulate(60, departure, String.format("departures_day_171_hour_22_per_minute_until_day_172_hour_00/mars_mission_departure_%d.txt", departure));
+        });
     }
 }

@@ -76,7 +76,7 @@ public class MarsMission {
                 StandardOpenOption.CREATE,
                 StandardOpenOption.TRUNCATE_EXISTING
         )) {
-            for (long i = 0; i < departureSeconds + MAX_MISSION_SECONDS; i += (long) dt) {
+            for (long i = 0; i < MAX_MISSION_SECONDS; i += (long) dt) {
                 if (i == departureSeconds) {
                     spaceship = Object.createSpaceshipFromEarth(earth, spaceshipMass, spaceshipRelativePosition, spaceshipTangentialRelativeVelocity);
                     final Object finalSpaceship = spaceship;
@@ -138,10 +138,10 @@ public class MarsMission {
                     spaceship.set(spaceshipXState, spaceshipYState);
                 }
 
-//                if (i % 100 == 0) {
+                if (i >= departureSeconds && i < 260 * 24 * 60 * 60) {
                     writer.write(new PlanetaryVariables(earthXState, earthYState, marsXState, marsYState, spaceshipXState, spaceshipYState).toString());
                     writer.newLine();
-//                }
+                }
 
                 if (spaceship != null && spaceship.distanceTo(mars) < mars.getRadius() + MIN_DISTANCE_TO_MARS) {
                     break;
