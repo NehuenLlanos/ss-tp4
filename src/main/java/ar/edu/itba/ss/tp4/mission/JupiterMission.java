@@ -183,7 +183,7 @@ public class JupiterMission {
                     spaceship.set(spaceshipXState, spaceshipYState);
                 }
 
-                if (i % (86000) == 0) {
+                if (i % (86400) == 0) {
                     writer.write(new PlanetaryVariablesWithJupiter(earthXState, earthYState, marsXState, marsYState, jupiterXState, jupiterYState, spaceshipXState, spaceshipYState).toString());
                     writer.newLine();
                 }

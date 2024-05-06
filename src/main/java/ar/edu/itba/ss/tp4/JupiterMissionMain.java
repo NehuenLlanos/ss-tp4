@@ -6,6 +6,7 @@ import ar.edu.itba.ss.tp4.mission.Object;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -48,13 +49,29 @@ public class JupiterMissionMain {
         final double spaceshipTangentialRelativeVelocity = Double.parseDouble(data.get(22)); // Spaceship tangential velocity relative to Earth
 
         // To run the simulation with a specific delta t and departure time
-        final Object sun = new Object(sunRadius, sunMass, 0, 0, 0, 0);
-        final Object earth = new Object(earthRadius, earthMass, earthX, earthY, earthVelocityX, earthVelocityY);
-        final Object mars = new Object(marsRadius, marsMass, marsX, marsY, marsVelocityX, marsVelocityY);
-        final Object jupiter = new Object(jupiterRadius, jupiterMass, jupiterX, jupiterY, jupiterVelocityX, jupiterVelocityY);
+//        final Object sun = new Object(sunRadius, sunMass, 0, 0, 0, 0);
+//        final Object earth = new Object(earthRadius, earthMass, earthX, earthY, earthVelocityX, earthVelocityY);
+//        final Object mars = new Object(marsRadius, marsMass, marsX, marsY, marsVelocityX, marsVelocityY);
+//        final Object jupiter = new Object(jupiterRadius, jupiterMass, jupiterX, jupiterY, jupiterVelocityX, jupiterVelocityY);
+//
+//        final JupiterMission mission = new JupiterMission(sun, earth, mars, jupiter, spaceshipMass, spaceshipRelativePosition, spaceshipTangentialRelativeVelocity);
+//
+//        mission.simulate(1000, 0, "jupiter_mission_1000.txt");
 
-        final JupiterMission mission = new JupiterMission(sun, earth, mars, jupiter, spaceshipMass, spaceshipRelativePosition, spaceshipTangentialRelativeVelocity);
+        // To run the simulation for different departure days
+        List<Integer> departures = new ArrayList<>();
+        for (int i = 0; i < 60 * 60 * 24 * 365 * 5; i += 60 * 60 * 24) {
+            departures.add(i);
+        }
+        departures.parallelStream().forEach(departure -> {
+            final Object sun = new Object(sunRadius, sunMass, 0, 0, 0, 0);
+            final Object earth = new Object(earthRadius, earthMass, earthX, earthY, earthVelocityX, earthVelocityY);
+            final Object mars = new Object(marsRadius, marsMass, marsX, marsY, marsVelocityX, marsVelocityY);
+            final Object jupiter = new Object(jupiterRadius, jupiterMass, jupiterX, jupiterY, jupiterVelocityX, jupiterVelocityY);
 
-        mission.simulate(1000, 0, "jupiter_mission_1000.txt");
+            final JupiterMission mission = new JupiterMission(sun, earth, mars, jupiter, spaceshipMass, spaceshipRelativePosition, spaceshipTangentialRelativeVelocity);
+
+            mission.simulate(60, departure, String.format("jupiter_departures/jupiter_mission_departure_%d.txt", departure));
+        });
     }
 }

@@ -60,10 +60,10 @@ for verlet_file, beeman_file, gear_predictor_file, og_verlet_file in zip(verlets
 plt.rcParams.update({'font.size': 20})
 fig, ax = plt.subplots()
 lines = []
-lines.append(ax.scatter(xs, ecm_verlet, label="Verlet"))
-lines.append(ax.scatter(xs, ecm_beeman, label="Beeman"))
-lines.append(ax.scatter(xs, ecm_gear_predictor, label="Gear Predictor"))
 lines.append(ax.scatter(xs, ecm_og_verlet, label="Original Verlet"))
+lines.append(ax.scatter(xs, ecm_beeman, label="Beeman", s=120, color="tab:gray"))
+lines.append(ax.scatter(xs, ecm_gear_predictor, label="Gear Predictor"))
+lines.append(ax.scatter(xs, ecm_verlet, label="Verlet 2.0"))
 
 ax.set_xlabel("$\\Delta t \\  \\left( s \\right)$", fontdict={"weight": "bold"})
 ax.set_ylabel("$ECM$", fontdict={"weight": "bold"})

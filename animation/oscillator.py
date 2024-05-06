@@ -42,19 +42,19 @@ with (open(os.path.join(os.path.dirname(__file__), "..", "verlet_4.txt")) as ver
     position_gear_predictor = [float(x[1]) for x in gear_predictor]
     position_og_verlet = [float(x[1]) for x in og_verlet]
 
-    print("ECM Verlet: ", calculate_ecm(position_real, position_verlet))
+    print("ECM Original Verlet: ", calculate_ecm(position_real, position_og_verlet))
     print("ECM Beeman: ", calculate_ecm(position_real, position_beeman))
     print("ECM Gear Predictor: ", calculate_ecm(position_real, position_gear_predictor))
-    print("ECM Original Verlet: ", calculate_ecm(position_real, position_og_verlet))
+    print("ECM Verlet 2.0: ", calculate_ecm(position_real, position_verlet))
 
     plt.rcParams.update({'font.size': 20})
     fig, ax = plt.subplots()
     lines = []
-    lines.append(ax.plot(time, position_verlet, label="Verlet")[0])
+    lines.append(ax.plot(time, position_og_verlet, label="Original Verlet")[0])
     lines.append(ax.plot(time, position_beeman, label="Beeman")[0])
     lines.append(ax.plot(time, position_gear_predictor, label="Gear Predictor")[0])
-    lines.append(ax.plot(time, position_og_verlet, label="Original Verlet")[0])
-    lines.append(ax.plot(time, position_real, label="Real", linestyle="dotted")[0])
+    lines.append(ax.plot(time, position_verlet, label="Verlet 2.0")[0])
+    lines.append(ax.plot(time, position_real, label="Real", linestyle="dashdot", color="c", linewidth=2.0)[0])
 
     ax.set_xlabel("Tiempo $(s)$", fontdict={"weight": "bold"})
     ax.set_ylabel("Posición $(m)$", fontdict={"weight": "bold"})
