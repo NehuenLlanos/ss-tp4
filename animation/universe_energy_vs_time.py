@@ -6,9 +6,7 @@ import numpy as np
 
 ########### CONSTANT VARIABLES ###########
 FILENAME = "mars_mission"
-# RUNS = [60, 500, 1000, 3600, 10800, 21600, 43200, 86400]
-# RUNS = [60, 120, 180, 240, 300, 360, 420, 480, 540, 600, 660, 720, 780, 840, 900]
-RUNS = [10, 20, 30, 40, 50, 60]
+RUNS = [0.01, 0.1, 1, 10, 100, 1000, 10000]
 G = 6.67430 * 10 ** -20
 SUN_MASS = 2 * 10 ** 30
 EARTH_MASS = 5.972 * 10 ** 24
@@ -39,34 +37,61 @@ def instant_energy(earth_data, mars_data, spaceship_data):
     return U_total + K_total
 
 
-files = [open(os.path.join(os.path.dirname(__file__), "..", f"{FILENAME}_{x}.txt")) for x in RUNS]
+files = [open(os.path.join(os.path.dirname(__file__), "..", "{:s}_{:.3f}.txt").format(FILENAME, x)) for x in RUNS]
 plt.rcParams.update({'font.size': 20})
 fig, ax = plt.subplots()
+ax.ticklabel_format(axis="x", style="sci", useMathText=True)
+
 lines = []
 
-for file in files:
+average_energy_vs_dt_xs = []
+average_energy_vs_dt_ys = []
+average_energy_vs_dt_errors = []
+
+for file, deltaT in zip(files, RUNS):
     data = list(csv.reader(file, delimiter=" "))
     for i in range(len(data)):
         for j in range(len(data[i])):
             data[i][j] = float(data[i][j])
 
-    deltaT = data[1][0] - data[0][0]
     xs = []
     ys = []
+    first_energy = 0
+    did_first = False
     for instant in data:
-        xs.append(instant[0])
         energy = instant_energy(
             (instant[1], instant[2], instant[7], instant[8]),
             (instant[3], instant[4], instant[9], instant[10]),
             (instant[5], instant[6], instant[11], instant[12])
         )
-        ys.append(energy)
-    print(f"Delta t = {round(deltaT)} - Delta E = {ys[-1] - ys[0]}")
-    line, = ax.plot(xs, ys, label=f"$\\Delta t = {round(deltaT)} s$")
+        if not did_first:
+            did_first = True
+            first_energy = energy
+        else:
+            xs.append(instant[0])
+            ys.append(abs(100 - energy / first_energy * 100))
+
+    # Comment the following lines to get average energy lost vs deltaT
+    line, = ax.plot(xs, ys, label=f"$\\Delta t = {round(deltaT, 2)} s$")
     lines.append(line)
+
+    average_energy_vs_dt_xs.append(deltaT)
+    average_energy_vs_dt_ys.append(np.mean(ys))
+    average_energy_vs_dt_errors.append(np.std(ys, ddof=1))
+
     file.close()
 
+# Uncomment the following lines to get average energy lost vs deltaT
+# ax.errorbar(average_energy_vs_dt_xs, average_energy_vs_dt_ys, yerr=average_energy_vs_dt_errors, fmt="o")
+# ax.set_xscale("log")
+# ax.set_yscale("log")
+# ax.set_xlabel("$\\Delta t$ $\\left( s \\right)$", fontdict={"weight": "bold"})
+# ax.set_ylabel("Promedio de la energía perdida del sistema", fontdict={"weight": "bold"})
+
+# Comment the following lines to get average energy lost vs deltaT
 ax.set_xlabel("Tiempo $\\left( s \\right)$", fontdict={"weight": "bold"})
-ax.set_ylabel("Energía $\\left( \\frac{kg \\cdot km^2}{s^2} \\right)$", fontdict={"weight": "bold"})
+ax.set_ylabel("Porcentaje de energía perdida del sistema", fontdict={"weight": "bold"})
+ax.set_yscale("log")
 ax.legend(handles=lines)
+
 plt.show()
