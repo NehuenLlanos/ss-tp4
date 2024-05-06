@@ -13,9 +13,10 @@ def distance_between(a, b):
     return np.sqrt((a[0] - b[0])**2 + (a[1] - b[1])**2)
 
 
-# files = [open(os.path.join(os.path.dirname(__file__), "..", "departures", f"{FILENAME}_{x}.txt")) for x in range(0, 60 * 60 * 24 * 365 * 2, 60 * 60 * 24)]
+files = [open(os.path.join(os.path.dirname(__file__), "..", "departures", f"{FILENAME}_{x}.txt")) for x in range(0, 60 * 60 * 24 * 365 * 2, 60 * 60 * 24)]
 # files = [open(os.path.join(os.path.dirname(__file__), "..", "departures_day_171_per_hour_until_day_173", f"{FILENAME}_{x}.txt")) for x in range(171 * 24 * 60 * 60, 173 * 24 * 60 * 60, 60 * 60)]
-files = [open(os.path.join(os.path.dirname(__file__), "..", "departures_day_171_hour_22_per_minute_until_day_172_hour_00", f"{FILENAME}_{x}.txt")) for x in range(171 * 24 * 60 * 60 + 22 * 60 * 60, 172 * 24 * 60 * 60, 60)]
+# files = [open(os.path.join(os.path.dirname(__file__), "..", "departures_day_171_hour_22_per_minute_until_day_172_hour_00", f"{FILENAME}_{x}.txt")) for x in range(171 * 24 * 60 * 60 + 22 * 60 * 60, 172 * 24 * 60 * 60, 60)]
+
 plt.rcParams.update({'font.size': 20})
 fig, ax = plt.subplots()
 xs = []
@@ -45,10 +46,22 @@ for index, file in enumerate(files):
     file.close()
 
 print(f"El día de salida del cohete que logra la menor distancia con marte es {np.argmin(ys)} con una distancia de {np.min(ys)} km.")
+# print(f"La hora de salida del cohete que logra la menor distancia con marte es {np.argmin(ys)} con una distancia de {np.min(ys)} km.")
+# print(f"El minuto de salida del cohete que logra la menor distancia con marte es {np.argmin(ys)} con una distancia de {np.min(ys)} km.")
 print(f"El tiempo en segundos con menor distancia respecto a marte es {seconds[np.argmin(ys)]}.")
+
+ax.axvline(x=xs[np.argmin(ys)], color="k", linestyle="--", zorder=-10)
 ax.scatter(xs, ys)
-# ax.set_xlabel("Día de partida", fontdict={"weight": "bold"})
+ax.scatter(xs[np.argmin(ys)], np.min(ys), color="tab:red")
+
+ax.set_xlabel("Día de partida", fontdict={"weight": "bold"})
 # ax.set_xlabel("Hora de partida a partir del día 171", fontdict={"weight": "bold"})
-ax.set_xlabel("Minuto de partida a partir del día 171 a las 22:00", fontdict={"weight": "bold"})
+# ax.set_xlabel("Minuto de partida a partir del día 171 a las 22:00", fontdict={"weight": "bold"})
 ax.set_ylabel("Distancia a Marte $\\left( km \\right)$", fontdict={"weight": "bold"})
+
+ax.set_xticks(np.append(np.arange(0, 800, 100), [xs[np.argmin(ys)]]))
+# ax.set_xticks(np.append(np.arange(0, 50, 10), [xs[np.argmin(ys)]]))
+# ax.set_xticks(np.append(np.arange(0, 121, 20), [xs[np.argmin(ys)]]))
+
+ax.margins(0.05)
 plt.show()
