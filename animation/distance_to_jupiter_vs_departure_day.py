@@ -18,16 +18,16 @@ def annotate_point(x, y, text, axis):
         arrowprops=arrow_props,
         bbox=bbox_props
     )
-    axis.annotate(text, xy=(x, y), xytext=(0.5, 0.1), **kw)
+    axis.annotate(text, xy=(x, y), xytext=(0.7, 0.1), **kw)
 
 
 def distance_between(a, b):
     return np.sqrt((a[0] - b[0])**2 + (a[1] - b[1])**2)
 
 
-files = [open(os.path.join(os.path.dirname(__file__), "..", "departures", f"{FILENAME}_{x}.txt")) for x in range(0, 60 * 60 * 24 * 365 * 5, 60 * 60 * 24)]
-# files = [open(os.path.join(os.path.dirname(__file__), "..", "departures_day_171_per_hour_until_day_173", f"{FILENAME}_{x}.txt")) for x in range(171 * 24 * 60 * 60, 173 * 24 * 60 * 60, 60 * 60)]
-# files = [open(os.path.join(os.path.dirname(__file__), "..", "departures_day_171_hour_22_per_minute_until_day_172_hour_00", f"{FILENAME}_{x}.txt")) for x in range(171 * 24 * 60 * 60 + 22 * 60 * 60, 172 * 24 * 60 * 60, 60)]
+files = [open(os.path.join(os.path.dirname(__file__), "..", "..", "jupiter_departures", f"{FILENAME}_{x}.txt")) for x in range(0, 60 * 60 * 24 * 365 * 5, 60 * 60 * 24)]
+# files = [open(os.path.join(os.path.dirname(__file__), "..", "jupiter_departures_day_895_per_hour_until_day_897", f"{FILENAME}_{x}.txt")) for x in range(895 * 24 * 60 * 60, 897 * 24 * 60 * 60, 60 * 60)]
+# files = [open(os.path.join(os.path.dirname(__file__), "..", "jupiter_departures_day_896_hour_1_per_minute_until_day_896_hour_3", f"{FILENAME}_{x}.txt")) for x in range(896 * 24 * 60 * 60 + 60 * 60, 896 * 24 * 60 * 60 + 3 * 60 * 60, 60)]
 
 plt.rcParams.update({'font.size': 20})
 fig, ax = plt.subplots()
@@ -69,8 +69,8 @@ ax.scatter(xs, ys)
 ax.scatter(xs[np.argmin(ys)], np.min(ys), color="tab:red")
 
 ax.set_xlabel("Día de partida", fontdict={"weight": "bold"})
-# ax.set_xlabel("Hora de partida a partir del día 171", fontdict={"weight": "bold"})
-# ax.set_xlabel("Minuto de partida a partir del día 171 a las 22:00", fontdict={"weight": "bold"})
+# ax.set_xlabel("Hora de partida a partir del día 895", fontdict={"weight": "bold"})
+# ax.set_xlabel("Minuto de partida a partir del día 896 a la 1:00", fontdict={"weight": "bold"})
 ax.set_ylabel("Distancia a Júpiter $\\left( km \\right)$", fontdict={"weight": "bold"})
 
 annotate_point(xs[np.argmin(ys)], np.min(ys), f"Día {xs[np.argmin(ys)]}", ax)

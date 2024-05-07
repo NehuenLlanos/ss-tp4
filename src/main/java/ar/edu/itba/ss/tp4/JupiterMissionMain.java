@@ -59,8 +59,40 @@ public class JupiterMissionMain {
 //        mission.simulate(1000, 0, "jupiter_mission_1000.txt");
 
         // To run the simulation for different departure days
+//        List<Integer> departures = new ArrayList<>();
+//        for (int i = 0; i < 60 * 60 * 24 * 365 * 5; i += 60 * 60 * 24) {
+//            departures.add(i);
+//        }
+//        departures.parallelStream().forEach(departure -> {
+//            final Object sun = new Object(sunRadius, sunMass, 0, 0, 0, 0);
+//            final Object earth = new Object(earthRadius, earthMass, earthX, earthY, earthVelocityX, earthVelocityY);
+//            final Object mars = new Object(marsRadius, marsMass, marsX, marsY, marsVelocityX, marsVelocityY);
+//            final Object jupiter = new Object(jupiterRadius, jupiterMass, jupiterX, jupiterY, jupiterVelocityX, jupiterVelocityY);
+//
+//            final JupiterMission mission = new JupiterMission(sun, earth, mars, jupiter, spaceshipMass, spaceshipRelativePosition, spaceshipTangentialRelativeVelocity);
+//
+//            mission.simulate(60, departure, String.format("jupiter_departures/jupiter_mission_departure_%d.txt", departure));
+//        });
+
+        // To run the simulation for different departure hours
+//        List<Integer> departures = new ArrayList<>();
+//        for (int i = 895 * 24 * 60 * 60; i < 897 * 24 * 60 * 60; i += 60 * 60) {
+//            departures.add(i);
+//        }
+//        departures.parallelStream().forEach(departure -> {
+//            final Object sun = new Object(sunRadius, sunMass, 0, 0, 0, 0);
+//            final Object earth = new Object(earthRadius, earthMass, earthX, earthY, earthVelocityX, earthVelocityY);
+//            final Object mars = new Object(marsRadius, marsMass, marsX, marsY, marsVelocityX, marsVelocityY);
+//            final Object jupiter = new Object(jupiterRadius, jupiterMass, jupiterX, jupiterY, jupiterVelocityX, jupiterVelocityY);
+//
+//            final JupiterMission mission = new JupiterMission(sun, earth, mars, jupiter, spaceshipMass, spaceshipRelativePosition, spaceshipTangentialRelativeVelocity);
+//
+//            mission.simulate(60, departure, String.format("jupiter_departures_day_895_per_hour_until_day_897/jupiter_mission_departure_%d.txt", departure));
+//        });
+
+        // To run the simulation for different departure minutes
         List<Integer> departures = new ArrayList<>();
-        for (int i = 0; i < 60 * 60 * 24 * 365 * 5; i += 60 * 60 * 24) {
+        for (int i = 896 * 24 * 60 * 60 + 60 * 60; i < 896 * 24 * 60 * 60 + 3 * 60 * 60; i += 60) {
             departures.add(i);
         }
         departures.parallelStream().forEach(departure -> {
@@ -71,7 +103,7 @@ public class JupiterMissionMain {
 
             final JupiterMission mission = new JupiterMission(sun, earth, mars, jupiter, spaceshipMass, spaceshipRelativePosition, spaceshipTangentialRelativeVelocity);
 
-            mission.simulate(60, departure, String.format("jupiter_departures/jupiter_mission_departure_%d.txt", departure));
+            mission.simulate(60, departure, String.format("jupiter_departures_day_896_hour_1_per_minute_until_day_896_hour_3/jupiter_mission_departure_%d.txt", departure));
         });
     }
 }
