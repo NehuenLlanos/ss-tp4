@@ -189,7 +189,7 @@ python animation/oscillator.py
 
 This will generate a plot with the position of the oscillator as a function of time for each integration method, as well as the analytical solution.
 
-### Visualize the integrator method error vs delta t
+### Visualize the integrator method error vs $\Delta t$
 
 To visualize the error of each integration method as a function of delta t, run the following command:
 
