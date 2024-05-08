@@ -108,63 +108,29 @@
 
         \begin{frame}{Introducción}
             \begin{itemize}
-                \item \textbf{Objetivo:}
+                \item Dinámica molecular regida por el paso temporal.
+                \item Simulación de un viaje espacial de una nave desde la Tierra a Marte en un espacio bidimensional.
+                \item \textbf{Sistema real:}
                 \begin{itemize}
-                    \item Simular un sistema de partículas en un espacio bidimensional.
-                    \item Predecir propiedades de sistemas físicos a nivel de partículas.
-                    \item Relacionar observables macroscópicos con dinámicas microscópicas.
-                \end{itemize}
-                \item \textbf{Modo de simulación:}
-                \begin{itemize}
-                    \item Simulación dirigida por eventos.
-                    \item Se calculan los tiempos de colisión.
-                    \item Se avanzan los estados hasta ese tiempo.
+                    \item El sistema solar.
+                    \item Bolas de pool en una mesa de pool.
+                    \item Deposición de un átomo en una superficie.
                 \end{itemize}
             \end{itemize}
         \end{frame}
-
-        \subsection{Sistema Real}
-
-            \begin{frame}{Sistema Real}
-                \begin{itemize}
-                    \item Las partículas tienen un radio $r$ y una velocidad inicial $\vec{v}$.
-                    \item Se estudia como colisionan entre sí y con las paredes del contenedor.
-                \end{itemize}
-                \begin{minipage}[t]{0.5\textwidth}
-                    \begin{itemize}
-                        \item \textbf{Aplicaciones:}
-                        \begin{itemize}
-                            \item Movimiento de moléculas de gas.
-                            \item Dinámicas de reacciones químicas.
-                            \item Desarrollo de videojuegos.
-                        \end{itemize}
-                    \end{itemize}
-                \end{minipage}
-                \hfill
-                % HASTA ACA ESTA CAMBIADO
-                \begin{minipage}[t]{0.45\textwidth}
-                    \begin{figure}[H]
-                        \centering
-                        \includegraphics[width=\linewidth]{./angrybirds}
-                        \label{fig:angry_birds}
-                    \end{figure}
-                \end{minipage}
-            \end{frame}
 
         \subsection{Fundamentos}
 
             \begin{frame}{Fundamentos}
                 \begin{itemize}
-                    \item Las partículas son una 5-upla $(x, y, R, v_x, v_y)$
-                    \item Las partículas se mueven en linea recta hasta que ocurre una colisión:
+                    \item Fuerza de gravedad entre dos planetas:
                         \begin{equation*}
-                            \vec{x_i}(t+1) = \vec{x_i}(t) + \vec{v_i}(t) t_c\ ; \ t_c = \text{tiempo mínimo de colisión}
+                            \vec{F}_{p_1; p_2} = G \frac{m_p_1\ m_p_2}{r_{p_1;p_2}^2} \vec{e}_{p_1; p_2}
                         \end{equation*}
-                    \item Se busca el tiempo en el que las partículas colisionan:
+                    \item Constante de gravitación universal:
                         \begin{equation*}
-                            \left( x_i - x_j \right) ^2 + \left( y_i - y_j \right) ^2 = \left( R_i + R_j \right) ^2
+                            G=6.6743 \times 10^{-20} \frac{km^3}{kg\ s^2}
                         \end{equation*}
-                    \item Las colisiones son elásticas y se conserva el impulso.
                 \end{itemize}
             \end{frame}
 
@@ -186,23 +152,23 @@
                 \begin{algorithmic}[1]
                     \ttfamily \scriptsize
                     \State Create output file
-                    \State collisions $\gets$ new OrderedSet()
-                    \ForAll{p $\in$ particles}
-                        \State collisions $\gets$ \Call{CalculateCollisionsWithWalls}{p}
-                        \ForAll{q $\in$ particles}
-                            \State collisions $\gets$ \Call{CalculateCollisionsBetweenParticles}{p, q}
-                        \EndFor
-                    \EndFor
-                    \While{$i < eventCount$}
-                        \State first $\gets$ \Call{PopFirstCollision}{collisions}
-                        \ForAll{p $\in$ particles}
-                            \State \Call{Move}{p, first.time}
-                        \EndFor
-                        \State \Call{UpdateCollisionsTime}{first.time}
-                        \State \Call{WriteOutput}{particles}
-                        \State \Call{UpdateVelocities}{first.p1, first.p2}
-                        \State \Call{CalculateNewCollisions}{first}
-                        \State $i \gets i + 1$
+                    \State earthAcc $\gets$ [earthAccX, earthAccY](sun, mars)
+                    \State marsAcc $\gets$ [marsAccX, marsAccY](sun, earth)
+                    \State integrators $\gets$ [earthAcc, marsAcc]
+                    \While{$t < departureTime + twoYears$}
+                        \If{$t = departureTime$}
+                            \State earthAcc $\gets$ [earthAccX, earthAccY](sun, mars, ship)
+                            \State marsAcc $\gets$ [marsAccX, marsAccY](sun, earth, ship)
+                            \State shipAcc $\gets$ [shipAccX, shipAccY](sun, earth, mars)
+                            \State integrators $\gets$ [earthAcc, marsAcc, shipAcc]
+                        \EndIf
+                        \State \Call{UpdateStateVariables}{earth}
+                        \State \Call{UpdateStateVariables}{mars}
+                        \If{$t \geq departureTime$}
+                            \State \Call{UpdateStateVariables}{ship}
+                        \EndIf
+                        \State \Call{WriteOutput}{earth, mars, ship}
+                        \State $i \gets i + dt$
                     \EndWhile
                 \end{algorithmic}
             \end{frame}
@@ -215,100 +181,99 @@
                 \begin{itemize}
                     \item Parámetros de entrada fijos:
                     \begin{itemize}
-                        \item Número de partículas ($N$): \alert{$300$}
-                        \item Cantidad de eventos ($E$): \alert{$20\,000$}
-                        \item Longitud del plano ($L$): \alert{$0.1 m$}
-                        \item Radio de partículas ($r$): \alert{$0.001 m$}
-                        \item Radio del obstáculo ($R$): \alert{$0.005 m$}
-                        \item Masa de partículas ($m$): \alert{$1 kg$}
-                        \item Masa del obstáculo ($m$): \alert{$3 kg$}
+                        \item $m_{sun}$: \alert{$2\times 10^{30}kg$}
+                        \item $R_{sun}$: \alert{$696340km$}
+                        \item $m_{earth}$: \alert{$5,9722\times 10^{24}kg$}
+                        \item $R_{earth}$: \alert{$6371km$}
+                        \item $\vec{r}_{earth}$: \alert{$(-1,219\times 10^{8}; -8,831\times 10^{7})km$}
+                        \item $\vec{v}_{earth}$: \alert{$(1,698\times 10; -2,423\times 10)km/s$}
+                        \item $m_{mars}$: \alert{$6,4\times 10^{23}kg$}
+                        \item $R_{mars}$: \alert{$3389,5km$}
+                        \item $\vec{r}_{mars}$: \alert{$(1,758\times 10^{8}; -1,087\times 10^{8})km$}
+                        \item $\vec{v}_{mars}$: \alert{$(1,366; 2,268)km/s$}
+                        \item $m_{ship}$: \alert{$2\times 10^{5} kg$}
+                        \item $d_{shipRelEarth}$: \alert{$1500km$}
                     \end{itemize}
                     \item Parámetros de entrada variables:
                     \begin{itemize}
-                        \item Módulo de la velocidad inicial ($v_0$): \alert{$\{1, 3, 6, 10\} m/s$}
+                        \item $v_{shipTangRelEarth}$: \alert{$\{15,02; 15,021; ...; 15,219; 15,22\}km/s$}
+                        \item ${dt}$: \alert{$\{0,01;0,1;1;10;100;1000;10000\}s$}
                     \end{itemize}
                 \end{itemize}
             \end{frame}
 
         \subsection{Observables}
 
-            \begin{frame}{Presión en paredes y obstáculo en función del tiempo ($P(t)$)}
+            \begin{frame}{Conservación de la Energía en el sistema}
                 \begin{itemize}
-                    \item Presión en paredes en función del tiempo:
+                    \item Energía Cinética:
                     \begin{equation*}
-                        P_{Paredes}(t) = \frac{\sum \Delta V_{n\ (Paredes)}}{\Delta t \cdot L \cdot 4}
+                        K_{p} = \frac{1}{2} m_{p} v_{p}^2
                     \end{equation*}
+                    \item Energía Potencial:
                     \begin{equation*}
-                        v_{n\ (Paredes\ Sup.\ y\ Inf.)} = \left| v \cdot \sin(\alpha) \cdot 2 \right|
+                        U_{(p_1,p_2)} = - G \left( \frac{m_{p_1} m_{p_2}}{\sqrt{(x_{p_1} - x_{p_2})^2 + (y_{p_1} - y_{p_2})^2}} \right)
                     \end{equation*}
+                    \item Conservación de la Energía en el sistema:
                     \begin{equation*}
-                        v_{n\ (Paredes\ Izq.\ y\ Der.)} = \left| v \cdot \cos(\alpha) \cdot 2 \right|
-                    \end{equation*}
-                    \item Presión en el obstáculo en función del tiempo:
-                    \begin{equation*}
-                        P_{Obst\acute{a}culo}(t) = \frac{\sum \vec{v_{n\ (Obst\acute{a}culo)}}}{\Delta t \cdot 2\pi \cdot R}
-                    \end{equation*}
-                    \begin{equation*}
-                          \vec{v_{n\ (Obst\acute{a}culo)}} = \left| {v \cdot \cos \left( \atantwo \left(\frac{L}{2} - y, \frac{L}{2} - x \right) \right) \cdot 2} \right|
+                        K_{total} + U_{total} = \text{constante}
                     \end{equation*}
                 \end{itemize}
             \end{frame}
 
-            \begin{frame}{Tiempo en el que el nro. de choques alcanza el 20\% de $N$ }
+            \begin{frame}{Momento de partida de la nave para llegar a Marte}
                 \begin{itemize}
-                    \item Se realizan diez (10) corridas.
-                    \item Se estudia el tiempo en el que el 20\% de las partículas colisionan por primera vez con el obstáculo.
+                    \item 730 lanzamientos (1 por día). Obtenemos día que logra distancia mínima.
+                    \item 48 lanzamientos (1 por hora) para el día obtenido y el anterior. Obtenemos hora que logra distancia mínima.
+                    \item 120 lanzamientos (1 por minuto) para la hora obtenida y la anterior. Obtenemos minuto que logra distancia mínima.
+                    \item Distancia entre la nave y marte:
                     \begin{equation*}
-                        t_{\text{prom}} = \frac{\sum_{i=1}^{10} t_i}{10} \ ,\ t_i\text{: tiempo en corrida }i
-                    \end{equation*}
-                    \begin{equation*}
-                        \sigma = \sqrt{\frac{1}{9} \sum_{i=1}^{10} (t_i - t_{\text{prom}})^2}
+                        d_{(ship, mars)} = \sqrt{(x_{ship} - x_{mars})^2 + (y_{ship} - y_{mars})^2}
                     \end{equation*}
                 \end{itemize}
             \end{frame}
 
-            \begin{frame}{Número de choques por unidad de tiempo}
+            \begin{frame}{Variación módulo de velocidad de la nave para llegar a Marte}
                 \begin{itemize}
-                    \item Se calcula la pendiente de la curva mediante el método de regresión lineal simple
+                    \item Obtenemos la velocidad de la nave en coordenadas cartesianas.
+                    \begin{minipage}[t]{0.55\textwidth}
+                        \begin{equation*}
+                            \hat{e_n} = \frac{\vec{r}_{ship} - \vec{r}_{earth}}{||\vec{r}_{ship} - \vec{r}_{earth}||}= (e_n \hat{\imath}, e_n \hat{\jmath})
+                        \end{equation*}
+                    \end{minipage}
+                    \hfill
+                    \begin{minipage}[t]{0.3\textwidth}
+                        \begin{equation*}
+                            \hat{e_t} = (-e_n \hat{\imath}, e_n \hat{\jmath})
+                        \end{equation*}
+                    \end{minipage}
                     \begin{equation*}
-                        \begin{split}
-                            m_k(\iota) = \frac{\iota \sum_{i=1}^\iota x_i y_i - \sum_{i=1}^\iota x_i \sum_{i=1}^\iota y_i }{\iota \sum_{i=1}^\iota x_i^2 - \left(\sum_{i=1}^\iota x_i \right)^2}
-                            \ , 1 \leq k \leq 10
-                            \\ \iota = \text{cantidad de choques en el intervalo de tiempo}
-                        \end{split}
+                        \vec{v}_{x_{ship}} = \vec{v}_{x_{earth}} + v_{shipTangRelEarth} \cdot e_t \hat{\imath}
                     \end{equation*}
-                    \item Se promedian los valores obtenidos de cada una de las diez (10) corridas y se calcula su error asociado:
                     \begin{equation*}
-                            m_{prom} = \frac{1}{10} \sum_{i=1}^{10} m_i
-                        \text{ ; }
-                            \sigma = \sqrt{\frac{1}{9} \sum_{i=1}^{10} (m_i - m_{\text{prom}})^2}
+                        \vec{v}_{y_{ship}} = \vec{v}_{y_{earth}} +v_{shipTangRelEarth} \cdot e_t \hat{\jmath}
+                    \end{equation*}
+                    \begin{equation*}
+                        v_{shipTangRelEarth} = 7,12km/s + \alpha
+                    \end{equation*}
+                    \begin{equation*}
+                        \alpha \in \{7,9;7,901;...;8,099;8,1\}km/s
                     \end{equation*}
                 \end{itemize}
             \end{frame}
 
-            \begin{frame}{Desplazamiento cuadrático medio ($DCM$)}
+            \begin{frame}{Misión Júpiter}
                 \begin{itemize}
-                    \item Se realiza para cuatro (4) velocidades y diez (10) corridas cada una.
-                    \item Se divide el intervalo de tiempo en cien (100) $\Delta t$.
-                    \item Se obtiene el desplazamiento cuadrático medio para cada $\Delta t$:
-                    \begin{equation*}
-                        DCM_{\Delta t} = \frac{\sum_{i=1}^{10} \left( x_{t_i} - x_0 \right)^2 + \left( y_{t_i} - y_0 \right)^2}{10}
-                    \end{equation*}
-                \end{itemize}
-            \end{frame}
-
-            \begin{frame}{Coeficiente de difusión ($D$)}
-                \begin{itemize}
-                    \item Se obtiene la pendiente de la curva de $DCM$ en función del tiempo mediante el método
-                    de regresión lineal simple para cada velocidad.
-                    \begin{equation*}
-                        m_v = \frac{100 \sum_{i=1}^{100} x_i y_i - \sum_{i=1}^{100} x_i \sum_{i=1}^{100} y_i }{100 \sum_{i=1}^{100} x_i^2
-                        - \left(\sum_{i=1}^{100} x_i \right)^2},\ v \in \{1, 3, 6, 10\}
-                    \end{equation*}
-                    \item Se obtiene el coeficiente de difusión:
-                    \begin{equation*}
-                        D_v = \frac{m_v}{4},\ v \in \{1, 3, 6, 10\}
-                    \end{equation*}
+                    \item Se agrega el planeta Júpiter al sistema.
+                    \item La órbita de Júpiter es de 12 años, pero se simulan 5 dado que existe un patrón.
+                    \item Se realiza el mismo análisis que para el viaje a Marte.
+                    \item Parámetros fijos:
+                    \begin{itemize}
+                        \item $m_{jupiter}$: \alert{$1,898\times 10^{27}kg$}
+                        \item $R_{jupiter}$: \alert{$69911km$}
+                        \item $\vec{r}_{jupiter}$: \alert{$(4,197\times 10^{8}; 6,209\times 10^{8})km$}
+                        \item $\vec{v}_{jupiter}$: \alert{$(-1,098\times 10; 7,940)km/s$}
+                    \end{itemize}
                 \end{itemize}
             \end{frame}
 
