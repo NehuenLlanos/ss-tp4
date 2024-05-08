@@ -13,7 +13,7 @@ import java.util.Iterator;
 import java.util.function.BiFunction;
 
 public class OscillatorMain {
-    public static void main(String[] args) {
+    public static void run(String[] args) {
         BiFunction<Double, Double, Double> acceleration = (r,v) -> (-1 * Constants.K * r - 1 * Constants.GAMMA * v) / Constants.M;
         double r0 = 1.0;
         double v0 = - 1 * Constants.A * Constants.GAMMA / (2 * Constants.M);

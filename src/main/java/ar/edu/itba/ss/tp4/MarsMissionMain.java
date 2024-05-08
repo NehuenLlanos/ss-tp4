@@ -14,7 +14,7 @@ import ar.edu.itba.ss.tp4.mission.Object;
 import ar.edu.itba.ss.tp4.utils.PlanetaryVariables;
 
 public class MarsMissionMain {
-    public static void main(String[] args) {
+    public static void run(String[] args) {
         List<String> data = null;
         try (Stream<String> stream = Files.lines(Paths.get("input.txt"))) {
             data = stream.toList();

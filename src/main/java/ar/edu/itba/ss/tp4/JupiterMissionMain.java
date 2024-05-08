@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class JupiterMissionMain {
-    public static void main(String[] args) {
+    public static void run(String[] args) {
         List<String> data = null;
         try (Stream<String> stream = Files.lines(Paths.get("jupiter_input.txt"))) {
             data = stream.toList();
