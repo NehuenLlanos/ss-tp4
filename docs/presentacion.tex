@@ -316,321 +316,228 @@
 
         \subsection{Animación del sistema}
 
-            \begin{frame}{Sistema con $v_0=1m/s$}{Animación}
-                \begin{minipage}[t]{0.60\textwidth}
+            \begin{frame}{Animación del sistema}{}
+                \begin{minipage}[t]{0.49\textwidth}
                     \begin{figure}[H!]
-                        \includegraphics[height=.65\textheight]{./animation_obstacle_still_v_1}
-                        \caption*{Véase la animación completa en \url{https://youtu.be/6y7aywkQ5ro}.}
-                        \label{fig:a_1}
-                    \end{figure}
-                \end{minipage}
-                \hfill
-                \begin{minipage}[t]{0.30\textwidth}
-                    \begin{block}{Datos del sistema}
-                        \begin{itemize}
-                            \item $N=300$
-                            \item $E=20\,000$
-                            \item $v_0 = 1 m/s$
-                        \end{itemize}
-                    \end{block}
-                \end{minipage}
-            \end{frame}
-
-            \begin{frame}{Sistema con $v_0 \in \{ 3, 6, 10\}m/s$}{Animación}
-                \begin{minipage}[t]{0.3\textwidth}
-                    \begin{figure}[H!]
-                        \includegraphics[width=\textwidth]{./animation_obstacle_still_v_3}
-                        \caption*{Véase la animación completa en \url{https://youtu.be/e0YvqmfTLc4}.}
-                        \label{fig:a_2}
+                        \includegraphics[height=.65\textheight]{./TODO}
+                        \caption*{Véase la animación completa en \url{TODO}.}
+                        \label{fig:marte_1}
                     \end{figure}
                     \begin{beamercolorbox}[sep=5pt,center]{block body}
                         \centering
-                        \small{$v_0=3m/s$}
+                        \small{Día de partida: TODO}
                     \end{beamercolorbox}
                 \end{minipage}
                 \hfill
-                \begin{minipage}[t]{0.30\textwidth}
+                \begin{minipage}[t]{0.49\textwidth}
                     \begin{figure}[H!]
-                        \includegraphics[width=\textwidth]{./animation_obstacle_still_v_6}
-                        \caption*{Véase la animación completa en \url{https://youtu.be/DVVqFmP-cuQ}.}
-                        \label{fig:a_3}
+                        \includegraphics[height=.65\textheight]{./TODO}
+                        \caption*{Véase la animación completa en \url{TODO}.}
+                        \label{fig:marte_2}
                     \end{figure}
                     \begin{beamercolorbox}[sep=5pt,center]{block body}
                         \centering
-                        \small{$v_0=6m/s$}
-                    \end{beamercolorbox}
-                \end{minipage}
-                \hfill
-                \begin{minipage}[t]{0.30\textwidth}
-                    \begin{figure}[H!]
-                        \includegraphics[width=\textwidth]{./animation_obstacle_still_v_10}
-                        \caption*{Véase la animación completa en \url{https://youtu.be/8M5MV5kRghI}.}
-                        \label{fig:a_4}
-                    \end{figure}
-                    \begin{beamercolorbox}[sep=5pt,center]{block body}
-                        \centering
-                        \small{$v_0=10m/s$}
+                        \small{Día de partida: TODO}
                     \end{beamercolorbox}
                 \end{minipage}
             \end{frame}
 
-        \subsection{Presión en paredes y obstáculo}
+        \subsection{Elección del $\Delta t$}
 
-            \begin{frame}{Presión vs Tiempo con $v_0=1m/s$}{Observable: Presión}
+            \begin{frame}{Energía perdida en función del tiempo}{Elección del $\Delta t$}
                     \begin{figure}[H!]
-                        \includegraphics[width=0.9\textwidth]{./pressure_vs_time_1}
-                        \label{fig:p_1}
+                        \includegraphics[width=0.9\textwidth]{./energia_perdida_vs_tiempo}
+                        \label{fig:marte_3}
                     \end{figure}
                     \begin{beamercolorbox}[sep=5pt,center]{block body}
-                        \begin{minipage}[t]{0.3\textwidth}
-                            \centering
-                            \small{$N=300$}
-                        \end{minipage}
-                        \hfill
-                        \begin{minipage}[t]{0.3\textwidth}
-                            \centering
-                            \small{$E=20\,000$}
-                        \end{minipage}
-                        \hfill
-                        \begin{minipage}[t]{0.3\textwidth}
-                            \centering
-                            \small{$v_0 = 1 m/s$}
-                        \end{minipage}
+                        \centering
+                        \small{Estudio en 50 días}
                     \end{beamercolorbox}
             \end{frame}
 
-            \begin{frame}{Presión vs Temperatura}{Observable: Presión}
+            \begin{frame}{Promedio de energía perdida vs \Delta t}{Elección del $\Delta t$}
                 \begin{figure}[H!]
-                    \includegraphics[width=0.9\textwidth]{./pressure_vs_temperature}
-                    \label{fig:p_vs_t}
+                    \includegraphics[width=0.9\textwidth]{./promedio_energia_perdida_vs_dt}
+                    \label{fig:marte_4}
                 \end{figure}
                 \begin{beamercolorbox}[sep=5pt,center]{block body}
-                    \begin{minipage}[t]{0.3\textwidth}
-                        \centering
-                        \small{$N=300$}
-                    \end{minipage}
-                    \hfill
-                    \begin{minipage}[t]{0.3\textwidth}
-                        \centering
-                        \small{$E=20\,000$}
-                    \end{minipage}
+                    \centering
+                    \small{Estudio en 50 días}
                 \end{beamercolorbox}
             \end{frame}
 
-        \subsection{Tiempo en el que el 20\% de las partículas colisionan con el obstáculo}
+        \subsection{Momento óptimo de partida para arribar a Marte}
 
-            \begin{frame}{Número de Colisiones vs Tiempo}{Observable: Tiempo en el que el 20\% de las partículas colisionan con el obstáculo}
+            \begin{frame}{Distancia mínima a Marte vs día de partida}{Momento óptimo de partida para arribar a Marte}
                 \begin{figure}[H!]
-                    \includegraphics[width=0.9\textwidth]{./unique_collisions_vs_time}
-                    \label{fig:threshold_1}
+                    \includegraphics[width=0.9\textwidth]{./distancia_a_marte_vs_dia_de_partida}
+                    \label{fig:marte_5}
                 \end{figure}
                 \begin{beamercolorbox}[sep=5pt,center]{block body}
-                    \begin{minipage}[t]{0.45\textwidth}
-                        \centering
-                        \small{$N=300$}
-                    \end{minipage}
-                    \hfill
-                    \begin{minipage}[t]{0.45\textwidth}
-                        \centering
-                        \small{$E=20\,000$}
-                    \end{minipage}
+                    \centering
+                    \small{$\Delta t = 60s$ ; Misión exitosa si $d_{nave-marte} < 3520 km$}
                 \end{beamercolorbox}
             \end{frame}
 
-            \begin{frame}{Observable vs Temperatura}{Observable: Tiempo en el que el 20\% de las partículas colisionan con el obstáculo}
+            \begin{frame}{Distancia mínima a Marte vs hora de partida}{Momento óptimo de partida para arribar a Marte. A partir de 171d}
                 \begin{figure}[H!]
-                    \includegraphics[width=0.9\textwidth]{./threshold_vs_temperature}
-                    \label{fig:threshold_2}
+                    \includegraphics[width=0.9\textwidth]{./distancia_a_marte_vs_hora_de_partida}
+                    \label{fig:marte_6}
                 \end{figure}
                 \begin{beamercolorbox}[sep=5pt,center]{block body}
-                    \begin{minipage}[t]{0.45\textwidth}
-                        \centering
-                        \small{$N=300$}
-                    \end{minipage}
-                    \hfill
-                    \begin{minipage}[t]{0.45\textwidth}
-                        \centering
-                        \small{$E=20\,000$}
-                    \end{minipage}
+                    \centering
+                    \small{$\Delta t = 60s$ ; Misión exitosa si $d_{nave-marte} < 3520 km$}
                 \end{beamercolorbox}
             \end{frame}
 
-        \subsection{Nro. de colisiones con el obstáculo por unidad de tiempo}
-
-            \begin{frame}{Número de Colisiones vs Tiempo}{Observable: Nro. de colisiones con el obstáculo por unidad de tiempo}
+            \begin{frame}{Distancia mínima a Marte vs minuto de partida}{Momento óptimo de partida para arribar a Marte. A partir de 171d 22h}
                 \begin{figure}[H!]
-                    \includegraphics[width=0.9\textwidth]{./total_collisions_vs_time}
-                    \label{fig:slope_1}
+                    \includegraphics[width=0.9\textwidth]{./distancia_a_marte_vs_minuto_de_partida}
+                    \label{fig:marte_7}
                 \end{figure}
                 \begin{beamercolorbox}[sep=5pt,center]{block body}
-                    \begin{minipage}[t]{0.45\textwidth}
-                        \centering
-                        \small{$N=300$}
-                    \end{minipage}
-                    \hfill
-                    \begin{minipage}[t]{0.45\textwidth}
-                        \centering
-                        \small{$E=20\,000$}
-                    \end{minipage}
+                    \centering
+                    \small{$\Delta t = 60s$ ; $d_{nave-marte} = 2547.98 km$}
                 \end{beamercolorbox}
             \end{frame}
 
-            \begin{frame}{Observable vs Temperatura}{Observable: Nro. de colisiones con el obstáculo por unidad de tiempo}
+        \subsection{Velocidad de la nave vs tiempo}
+
+            \begin{frame}{Módulo de la velocidad de la nave vs tiempo}{Partida de la nave: 171d 23h 17m}
                 \begin{figure}[H!]
-                    \includegraphics[width=0.9\textwidth]{./slope_vs_temperature}
-                    \label{fig:slope_2}
+                    \includegraphics[width=0.9\textwidth]{./velocity_vs_time_for_travel_to_mars}
+                    \label{fig:marte_8}
                 \end{figure}
                 \begin{beamercolorbox}[sep=5pt,center]{block body}
-                    \begin{minipage}[t]{0.45\textwidth}
-                        \centering
-                        \small{$N=300$}
-                    \end{minipage}
-                    \hfill
-                    \begin{minipage}[t]{0.45\textwidth}
-                        \centering
-                        \small{$E=20\,000$}
-                    \end{minipage}
+                    \centering
+                    \small{$\Delta t = 60s$}
                 \end{beamercolorbox}
             \end{frame}
 
-        \subsection{Desplazamiento Cuadrático Medio}
+        \subsection{Variación de la velocidad incial de la nave}
 
-            \begin{frame}{Sistema con $v_0=1m/s$ y obstáculo en movimiento}{Animación}
-                \begin{minipage}[t]{0.60\textwidth}
+            \begin{frame}{Distancia mínima a Marte vs velocidad inicial de la nave}{Partida de la nave: 171d 23h 17m}
+                \begin{figure}[H!]
+                    \includegraphics[width=0.9\textwidth]{./min_distance_vs_v0_logaritmica_line_in_10^4_scatter}
+                    \label{fig:marte_9}
+                \end{figure}
+                \begin{beamercolorbox}[sep=5pt,center]{block body}
+                    \centering
+                    \small{$\Delta t = 60s$ ; Misión exitosa si $d_{nave-marte} < 10^4 km$}
+                \end{beamercolorbox}
+            \end{frame}
+
+            \begin{frame}{Distancia mínima a Marte vs velocidad inicial de la nave}{Partida de la nave: 171d 23h 17m}
+                \begin{figure}[H!]
+                    \includegraphics[width=0.9\textwidth]{./min_distance_vs_v0_logaritmica_line_in_10^4_reduced_scatter}
+                    \label{fig:marte_10}
+                \end{figure}
+                \begin{beamercolorbox}[sep=5pt,center]{block body}
+                    \centering
+                    \small{$\Delta t = 60s$ ; Misión exitosa si $d_{nave-marte} < 10^4 km$}
+                \end{beamercolorbox}
+            \end{frame}
+
+            \begin{frame}{Tiempo de vuelo vs velocidad inicial de la nave}{Partida de la nave: 171d 23h 17m}
+                \begin{figure}[H!]
+                    \includegraphics[width=0.9\textwidth]{./time_vs_v0_for_v_less_10^4_scatter}
+                    \label{fig:marte_11}
+                \end{figure}
+                \begin{beamercolorbox}[sep=5pt,center]{block body}
+                    \centering
+                    \small{$\Delta t = 60s$ ; Misión exitosa si $d_{nave-marte} < 10^4 km$}
+                \end{beamercolorbox}
+            \end{frame}
+
+        \subsection{Sistema con Júpiter}
+
+            \begin{frame}{Animación del sistema}{}
+                \begin{minipage}[t]{0.49\textwidth}
                     \begin{figure}[H!]
-                        \includegraphics[height=.65\textheight]{./animation_obstacle_moves_v_1}
-                        \caption*{Véase la animación completa en \url{https://youtu.be/ZB0ikr5PKak}.}
-                        \label{fig:a_5}
+                        \includegraphics[height=.65\textheight]{./TODO}
+                        \caption*{Véase la animación completa en \url{TODO}.}
+                        \label{fig:jupiter_1}
                     \end{figure}
+                    \begin{beamercolorbox}[sep=5pt,center]{block body}
+                        \centering
+                        \small{Día de partida: TODO}
+                    \end{beamercolorbox}
                 \end{minipage}
                 \hfill
-                \begin{minipage}[t]{0.30\textwidth}
-                    \begin{block}{Datos del sistema}
-                        \begin{itemize}
-                            \item $N=300$
-                            \item $E=20\,000$
-                            \item Partículas:
-                            \begin{itemize}
-                                \item $m = 1 kg$
-                                \item $v_0 = 1 m/s$
-                            \end{itemize}
-                            \item Obstáculo:
-                            \begin{itemize}
-                                \item $m = 3 kg$
-                                \item $v_0 = 0 m/s$
-                            \end{itemize}
-                        \end{itemize}
-                    \end{block}
+                \begin{minipage}[t]{0.49\textwidth}
+                    \begin{figure}[H!]
+                        \includegraphics[height=.65\textheight]{./TODO}
+                        \caption*{Véase la animación completa en \url{TODO}.}
+                        \label{fig:jupiter_2}
+                    \end{figure}
+                    \begin{beamercolorbox}[sep=5pt,center]{block body}
+                        \centering
+                        \small{Día de partida: TODO}
+                    \end{beamercolorbox}
                 \end{minipage}
             \end{frame}
 
-            \begin{frame}{Desplazamiento Cuadrático vs Tiempo}{Observable: Desplazamiento Cuadrático Medio}
+            \begin{frame}{Distancia mínima a Júpiter vs día de partida}{Momento óptimo de partida para arribar a Júpiter}
                 \begin{figure}[H!]
-                    \includegraphics[width=0.9\textwidth]{./dc_vs_time_1}
-                    \label{fig:dcm_1}
+                    \includegraphics[width=0.9\textwidth]{./distancia_a_jupiter_vs_dia_de_partida}
+                    \label{fig:jupiter_3}
                 \end{figure}
                 \begin{beamercolorbox}[sep=5pt,center]{block body}
-                    \begin{minipage}[t]{0.24\textwidth}
-                        \centering
-                        \small{$N=300$}
-                    \end{minipage}
-                    \hfill
-                    \begin{minipage}[t]{0.24\textwidth}
-                        \centering
-                        \small{$E=20\,000$}
-                    \end{minipage}
-                    \hfill
-                    \begin{minipage}[t]{0.24\textwidth}
-                        \centering
-                        \small{$v_0 = 1 m/s$}
-                    \end{minipage}
-                    \hfill
-                    \begin{minipage}[t]{0.24\textwidth}
-                        \centering
-                        \small{$\#Corridas = 10$}
-                    \end{minipage}
+                    \centering
+                    \small{$\Delta t = 60s$ ; Misión exitosa si $d_{nave-jupiter} < 71000 km$}
                 \end{beamercolorbox}
             \end{frame}
 
-            \begin{frame}{Desplazamiento Cuadrático Medio vs Tiempo}{Observable: Desplazamiento Cuadrático Medio}
+            \begin{frame}{Distancia mínima a Júpiter vs hora de partida}{Momento óptimo de partida para arribar a Júpiter. A partir de 895d}
                 \begin{figure}[H!]
-                    \includegraphics[width=0.9\textwidth]{./dcm_vs_time}
-                    \label{fig:dcm_2}
+                    \includegraphics[width=0.9\textwidth]{./distancia_a_jupiter_vs_hora_de_partida}
+                    \label{fig:jupiter_4}
                 \end{figure}
                 \begin{beamercolorbox}[sep=5pt,center]{block body}
-                    \begin{minipage}[t]{0.3\textwidth}
-                        \centering
-                        \small{$N=300$}
-                    \end{minipage}
-                    \hfill
-                    \begin{minipage}[t]{0.3\textwidth}
-                        \centering
-                        \small{$E=20\,000$}
-                    \end{minipage}
-                    \hfill
-                    \begin{minipage}[t]{0.3\textwidth}
-                        \centering
-                        \small{$\#Corridas = 10$}
-                    \end{minipage}
+                    \centering
+                    \small{$\Delta t = 60s$ ; Misión exitosa si $d_{nave-jupiter} < 71000 km$}
                 \end{beamercolorbox}
             \end{frame}
 
-            \begin{frame}{Coeficiente de Difusión vs Temperatura}{Observable: Coeficiente de Difusión}
+            \begin{frame}{Distancia mínima a Júpiter vs minuto de partida}{Momento óptimo de partida para arribar a Júpiter. A partir de 896d 1h}
                 \begin{figure}[H!]
-                    \includegraphics[width=0.9\textwidth]{./coefficient_diffusion_vs_temperature}
-                    \label{fig:dcm_3}
+                    \includegraphics[width=0.9\textwidth]{./distancia_a_jupiter_vs_minuto_de_partida}
+                    \label{fig:jupiter_5}
                 \end{figure}
                 \begin{beamercolorbox}[sep=5pt,center]{block body}
-                    \begin{minipage}[t]{0.3\textwidth}
-                        \centering
-                        \small{$N=300$}
-                    \end{minipage}
-                    \hfill
-                    \begin{minipage}[t]{0.3\textwidth}
-                        \centering
-                        \small{$E=20\,000$}
-                    \end{minipage}
-                    \hfill
-                    \begin{minipage}[t]{0.3\textwidth}
-                        \centering
-                        \small{$\#Corridas = 10$}
-                    \end{minipage}
+                    \centering
+                    \small{$\Delta t = 60s$ ; $d_{nave-jupiter} = 705125 km$}
+                \end{beamercolorbox}
+            \end{frame}
+
+            \begin{frame}{Distancia mínima a Júpiter vs velocidad inicial de la nave}{Partida de la nave: 896d 1h 52m}
+                \begin{figure}[H!]
+                    \includegraphics[width=0.9\textwidth]{./min_distance_vs_v0_logarithmic_jupiter}
+                    \label{fig:jupiter_6}
+                \end{figure}
+                \begin{beamercolorbox}[sep=5pt,center]{block body}
+                    \centering
+                    \small{$\Delta t = 60s$ ; Misión exitosa si $d_{nave-jupiter} < 10^6 km$}
+                \end{beamercolorbox}
+            \end{frame}
+
+            \begin{frame}{Tiempo de vuelo vs velocidad inicial de la nave}{Partida de la nave: 896d 1h 52m}
+                \begin{figure}[H!]
+                    \includegraphics[width=0.9\textwidth]{./travel_time_vs_v0_logarithmic_jupiter}
+                    \label{fig:jupiter_7}
+                \end{figure}
+                \begin{beamercolorbox}[sep=5pt,center]{block body}
+                    \centering
+                    \small{$\Delta t = 60s$ ; Misión exitosa si $d_{nave-jupiter} < 10^6 km$}
                 \end{beamercolorbox}
             \end{frame}
 
     \section{Conclusiones}
 
         \begin{frame}{Conclusiones}
-            \begin{block}{Presión del sistema}
-                \begin{itemize}
-                    \item Aumenta linealmente con la temperatura.
-                    \item \textbf{Se comporta como un gas ideal.}
-                    \item Se mantiene constante en el tiempo.
-                    \item La presión en el obstáculo es igual que en las paredes.
-                \end{itemize}
-            \end{block}
-            \begin{block}{Tiempo en el que el 20\% de las partículas colisionan con el obstáculo}
-                \begin{itemize}
-                    \item Disminuye exponencialmente con la temperatura.
-                    \item Se debe a la mayor energía cinética de las partículas.
-                \end{itemize}
-            \end{block}
-        \end{frame}
-
-        \begin{frame}{Conclusiones}
-            \begin{block}{Número de colisiones con el obstáculo por unidad de tiempo}
-                \begin{itemize}
-                    \item Aumenta logarítmicamente con la temperatura.
-                \end{itemize}
-            \end{block}
-            \begin{block}{Desplazamiento Cuadrático Medio}
-                \begin{itemize}
-                    \item Se llega más rápido al estacionario con mayor temperatura.
-                    \item El coeficiente de difusión aumenta con la temperatura.
-                    \item El coeficiente de difusión alcanza un valor estacionario.
-                    \item \textbf{Se comporta como los elementos de la naturaleza.}
-                \end{itemize}
-            \end{block}
+            \begin{itemize}
+                \item TODO
+            \end{itemize}
         \end{frame}
 
         \begin{frame}
