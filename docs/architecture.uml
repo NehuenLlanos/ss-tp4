@@ -1,0 +1,70 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+package integrators {
+interface Iterable<StatesVariables>
+
+interface IntegratorMethod extends Iterable {
+}
+
+class OriginalVerlet implements IntegratorMethod {
++ iterator()
+}
+
+class NewVerlet implements IntegratorMethod {
++ iterator()
+}
+
+class Beeman implements IntegratorMethod {
++ iterator()
+}
+
+class GearPredictor implements IntegratorMethod {
++ iterator()
+}
+}
+
+package mission {
+class Object {
+- radius
+- mass
+- x
+- y
+- vx
+- vy
+}
+
+class JupiterMission {
++ simulate()
+}
+
+class MarsMission {
++ simulate()
+}
+}
+
+class IntegratorsMain {
++ main()
+}
+
+class MarsMissionMain {
++ main()
+}
+
+class JupiterMissionMain {
++ main()
+}
+
+JupiterMissionMain *-- JupiterMission
+MarsMissionMain *-- MarsMission
+IntegratorsMain *-- OriginalVerlet
+IntegratorsMain *-- NewVerlet
+IntegratorsMain *-- Beeman
+IntegratorsMain *-- GearPredictor
+
+MarsMission *-- Object
+JupiterMission *-- Object
+MarsMission *-- GearPredictor
+JupiterMission *-- GearPredictor
+
+@enduml
