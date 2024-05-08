@@ -110,13 +110,25 @@
             \begin{itemize}
                 \item Dinámica molecular regida por el paso temporal.
                 \item Simulación de un viaje espacial de una nave desde la Tierra a Marte en un espacio bidimensional.
-                \item \textbf{Sistema real:}
-                \begin{itemize}
-                    \item El sistema solar.
-                    \item Bolas de pool en una mesa de pool.
-                    \item Deposición de un átomo en una superficie.
-                \end{itemize}
             \end{itemize}
+            \begin{minipage}[t]{0.5\textwidth}
+                \begin{itemize}
+                    \item Sistema real:
+                    \begin{itemize}
+                        \item El sistema solar.
+                        \item Bolas de pool en una mesa de pool.
+                        \item Deposición de un átomo en una superficie.
+                    \end{itemize}
+                \end{itemize}
+            \end{minipage}
+            \hfill
+            \begin{minipage}[t]{0.45\textwidth}
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[height=\linewidth]{./sistema_real}
+                    \label{fig:sistema_real}
+                \end{figure}
+            \end{minipage}
         \end{frame}
 
         \subsection{Fundamentos}
@@ -248,10 +260,10 @@
                         \end{equation*}
                     \end{minipage}
                     \begin{equation*}
-                        \vec{v}_{x_{ship}} = \vec{v}_{x_{earth}} + v_{shipTangRelEarth} \cdot e_t \hat{\imath}
+                        v_{x_{ship}} = v_{x_{earth}} + v_{shipTangRelEarth} \cdot e_t \hat{\imath}
                     \end{equation*}
                     \begin{equation*}
-                        \vec{v}_{y_{ship}} = \vec{v}_{y_{earth}} +v_{shipTangRelEarth} \cdot e_t \hat{\jmath}
+                        v_{y_{ship}} = v_{y_{earth}} +v_{shipTangRelEarth} \cdot e_t \hat{\jmath}
                     \end{equation*}
                     \begin{equation*}
                         v_{shipTangRelEarth} = 7,12km/s + \alpha
