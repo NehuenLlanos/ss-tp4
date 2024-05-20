@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.function.BiFunction;
 
 public class NewVerlet implements IntegratorMethod {
+    private final double t0;
     private final double dt;
     private final BiFunction<Double, Double, Double> acceleration;
     private final double r0;
@@ -17,6 +18,21 @@ public class NewVerlet implements IntegratorMethod {
             final double r0,
             final double v0
     ) {
+        this.t0 = 0;
+        this.dt = dt;
+        this.acceleration = acceleration;
+        this.r0 = r0;
+        this.v0 = v0;
+    }
+
+    public NewVerlet(
+            final double t0,
+            final double dt,
+            final BiFunction<Double, Double, Double> acceleration,
+            final double r0,
+            final double v0
+    ) {
+        this.t0 = t0;
         this.dt = dt;
         this.acceleration = acceleration;
         this.r0 = r0;
@@ -26,7 +42,7 @@ public class NewVerlet implements IntegratorMethod {
     @Override
     public Iterator<StateVariables> iterator() {
         return new Iterator<>() {
-            private double t = 0;
+            private double t = t0;
             private double r = r0;
             private double v = v0;
             private double previousR = r - dt * v + 0.5 * acceleration.apply(r, v) * Math.pow(dt, 2);
